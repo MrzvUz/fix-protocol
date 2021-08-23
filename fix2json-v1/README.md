@@ -1,6 +1,3 @@
-# fixprinter
-A FIX message pretty-printer using the python quickfix library.
-Used for displaying FIX protocol messages in a human-readable format.
 Can read from a file or stdin and detects FIX messages within
 each line of text.
 
