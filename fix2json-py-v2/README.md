@@ -1,5 +1,3 @@
-Source: https://stackoverflow.com/questions/6453879/how-to-log-quickfix-message-in-human-readable-format
-
 Depending on the user's need there are three solutions presented here.
 
     1. Marked-up XML
