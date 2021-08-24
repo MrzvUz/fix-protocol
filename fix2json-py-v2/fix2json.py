@@ -20,6 +20,8 @@ message = fix.Message(string, data_dictionary, True)
 xml = message.toXML()
 print(xml)
 
+print("-------------------------------------------")
+
 def get_field_type_map(data_dictionary_xml):
   """Preprocess DataDictionary to get field types."""
   field_type_map = {}
@@ -132,6 +134,8 @@ def parse_message_xml(xml, field_type_map, as_dict=False):
 # List of fields (groups embedded)
 parsed = parse_message_xml(xml, field_type_map, as_dict=False)
 print(json.dumps(parsed, indent=True))
+
+print("---------------------------------------------")
 
 # JSON-like output
 parsed = parse_message_xml(xml, field_type_map, as_dict=True)
