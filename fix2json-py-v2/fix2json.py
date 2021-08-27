@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-
-import quickfix as fix
-
+import json
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
-import json
+import quickfix as fix
+
 
 string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:20.881\00156=target\00122=8\00140=2\00144=9\00148=ABC\00155=ABC\00160=20060319-09:08:19\001548=184214\001549=2\001550=0\001552=2\00154=1\001453=2\001448=8\001447=D\001452=4\001448=AAA35777\001447=D\001452=3\00138=9\00154=2\001453=2\001448=8\001447=D\001452=4\001448=aaa\001447=D\001452=3\00138=9\00110=056\001"
 
 # Load data dictionary
-data_dictionary_xml = "FIX42.xml"
+data_dictionary_xml = "spec/FIX42.xml"
 data_dictionary = fix.DataDictionary(data_dictionary_xml)
 fix.Message().InitializeXML(data_dictionary_xml)
 
@@ -18,9 +17,7 @@ message = fix.Message(string, data_dictionary, True)
 
 # Marked-up XML
 xml = message.toXML()
-print(xml)
-
-print("-------------------------------------------")
+# print(xml)
 
 def get_field_type_map(data_dictionary_xml):
   """Preprocess DataDictionary to get field types."""
@@ -131,12 +128,14 @@ def parse_message_xml(xml, field_type_map, as_dict=False):
       parsed[field_map.tag] = field_map_to_dict(field_map, field_type_map)
   return parsed
 
-# List of fields (groups embedded)
-parsed = parse_message_xml(xml, field_type_map, as_dict=False)
-print(json.dumps(parsed, indent=True))
+# # List of fields (groups embedded)
+# parsed = parse_message_xml(xml, field_type_map, as_dict=False)
+# print(json.dumps(parsed, indent=True))
 
-print("---------------------------------------------")
+print("-------------------------------------------")
 
 # JSON-like output
 parsed = parse_message_xml(xml, field_type_map, as_dict=True)
 print(json.dumps(parsed, indent=True))
+
+print("-------------------------------------------")
