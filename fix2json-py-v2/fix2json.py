@@ -5,6 +5,31 @@ from collections import OrderedDict
 import quickfix as fix
 
 
+def lambda_handler(event, context=None):
+    try:
+        # 1. Iterate over each record.
+        for record in event["Records"]:
+            # 2. Handle event type.
+            if record["eventName"] == "INSERT":
+                handle_insert(record)
+    except Exception as e:
+        print(e)
+        return "Something went wrong."
+
+
+def handle_insert(record):
+    print("Handling INSERT event.")
+    # 3a. Parse newImage content.
+    newImage = record["dynamodb"]["NewImage"]
+    # 3b. Parse the values.
+    MsgData = newImage["MsgData"]["S"]
+    # 3c. Print it out:
+    print("New FIX message added with MsgData = " + MsgData)
+    print("Done hangling INSERT event")
+
+
+# string = handle_insert(record=True)
+
 string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:20.881\00156=target\00122=8\00140=2\00144=9\00148=ABC\00155=ABC\00160=20060319-09:08:19\001548=184214\001549=2\001550=0\001552=2\00154=1\001453=2\001448=8\001447=D\001452=4\001448=AAA35777\001447=D\001452=3\00138=9\00154=2\001453=2\001448=8\001447=D\001452=4\001448=aaa\001447=D\001452=3\00138=9\00110=056\001"
 
 # Load data dictionary
@@ -18,6 +43,7 @@ message = fix.Message(string, data_dictionary, True)
 # Marked-up XML
 xml = message.toXML()
 # print(xml)
+
 
 def get_field_type_map(data_dictionary_xml):
     """Preprocess DataDictionary to get field types."""
@@ -37,6 +63,7 @@ FLOAT_TYPES = ["FLOAT", "PERCENTAGE", "PRICE", "PRICEOFFSET"]
 BOOL_TYPES = ["BOOLEAN"]
 DATETIME_TYPES = ["LOCALMKTDATE", "MONTHYEAR", "UTCDATEONLY", "UTCTIMEONLY", "UTCTIMESTAMP"]
 STRING_TYPES = ["AMT", "CHAR", "COUNTRY", "CURRENCY", "DATA", "EXCHANGE", "MULTIPLEVALUESTRING", "STRING"]
+
 
 def field_map_to_list(field_map, field_type_map):
     fields = []
@@ -79,6 +106,7 @@ def field_map_to_list(field_map, field_type_map):
         fields.append(_field)
     return fields
 
+
 def field_map_to_dict(field_map, field_type_map):
     fields = OrderedDict()
     field_iter = iter([el for el in field_map if el.tag == "field"])
@@ -117,6 +145,7 @@ def field_map_to_dict(field_map, field_type_map):
             # Preference enum above value
             fields[key] = field.attrib.get("enum") or value
     return fields
+
 
 def parse_message_xml(xml, field_type_map, as_dict=False):
     parsed = OrderedDict()
