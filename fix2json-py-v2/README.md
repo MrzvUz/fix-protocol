@@ -7,3 +7,5 @@ Depending on the user's need there are three solutions presented here.
     3. JSON-like output.
 
 In the quickfix Python library, the FieldMap field and group key iterators are not exposed. So the approach is to first generate the XML and iterate over the tree. There is also no access to the getFieldType method of the DataDictionary, so the dictionary must be pre-processed to store the field types for conversion and handling of groups.
+
+Get quickfix library from: https://www.lfd.uci.edu/~gohlke/pythonlibs/
