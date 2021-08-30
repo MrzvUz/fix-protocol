@@ -32,13 +32,10 @@ def handle_insert(record):
 
 string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:20.881\00156=target\00122=8\00140=2\00144=9\00148=ABC\00155=ABC\00160=20060319-09:08:19\001548=184214\001549=2\001550=0\001552=2\00154=1\001453=2\001448=8\001447=D\001452=4\001448=AAA35777\001447=D\001452=3\00138=9\00154=2\001453=2\001448=8\001447=D\001452=4\001448=aaa\001447=D\001452=3\00138=9\00110=056\001"
 
-<<<<<<< HEAD
-# Load data dictionary
-data_dictionary_xml = "./FIX44.xml"
-=======
+
 # Load data dictionary.
 data_dictionary_xml = "spec/FIX44.xml"
->>>>>>> f98d13c8e9f7658d9502ac300e413c1070170b38
+
 data_dictionary = fix.DataDictionary(data_dictionary_xml)
 fix.Message().InitializeXML(data_dictionary_xml)
 
