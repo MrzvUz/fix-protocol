@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+import sys
+sys.path.append("quickfix")
+import quickfix as fix
 import json
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
-import quickfix as fix
+
 
 
 def lambda_handler(event, context=None):
@@ -34,7 +37,7 @@ string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:2
 
 
 # Load data dictionary.
-data_dictionary_xml = "spec/FIX44.xml"
+data_dictionary_xml = "fix-lib/spec/FIX44.xml"
 
 data_dictionary = fix.DataDictionary(data_dictionary_xml)
 fix.Message().InitializeXML(data_dictionary_xml)
@@ -171,3 +174,4 @@ parsed = parse_message_xml(xml, field_type_map, as_dict=True)
 print(json.dumps(parsed, indent=True))
 
 print("-------------------------------------------")
+
