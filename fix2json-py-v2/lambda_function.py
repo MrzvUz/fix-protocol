@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-import sys
-sys.path.append("quickfix")
-import quickfix as fix
+from fix_lib import quickfix
 import json
 import xml.etree.ElementTree as ET
 from collections import OrderedDict
@@ -37,13 +35,13 @@ string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:2
 
 
 # Load data dictionary.
-data_dictionary_xml = "fix-lib/spec/FIX44.xml"
+data_dictionary_xml = "fix_lib/spec/FIX44.xml"
 
-data_dictionary = fix.DataDictionary(data_dictionary_xml)
-fix.Message().InitializeXML(data_dictionary_xml)
+data_dictionary = quickfix.DataDictionary(data_dictionary_xml)
+quickfix.Message().InitializeXML(data_dictionary_xml)
 
 # String as fix message according to dictionary.
-message = fix.Message(string, data_dictionary, True)
+message = quickfix.Message(string, data_dictionary, True)
 
 # Marked-up XML.
 xml = message.toXML()
