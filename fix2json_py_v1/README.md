@@ -21,7 +21,7 @@ optional arguments:
 
 ## Example
 ```
-╰─ $./fix-parser.py --spec FIX42.xml --filename fix_messages
+╰─ $./fix_parser.py --/fix_lib/spec FIX42.xml --f fix_messages
 
 Output:
 

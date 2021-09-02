@@ -2,6 +2,7 @@
 # requires the python quickfix library: pip (or pip3) install quickfix
 
 import argparse
+# from fix_lib import quickfix as fix
 import quickfix as fix
 import sys
 
