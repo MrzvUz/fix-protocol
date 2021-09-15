@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# from fix_lib import quickfix
+
 import quickfix as fix
 import json
 import xml.etree.ElementTree as ET
@@ -30,13 +30,13 @@ def handle_insert(record):
     print("Done hangling INSERT event")
 
 
-# string = handle_insert(record=True)
+# string = handle_insert(MsgData=True)
 
 string = "8=FIX.4.4\0019=247\00135=s\00134=5\00149=sender\00152=20060319-09:08:20.881\00156=target\00122=8\00140=2\00144=9\00148=ABC\00155=ABC\00160=20060319-09:08:19\001548=184214\001549=2\001550=0\001552=2\00154=1\001453=2\001448=8\001447=D\001452=4\001448=AAA35777\001447=D\001452=3\00138=9\00154=2\001453=2\001448=8\001447=D\001452=4\001448=aaa\001447=D\001452=3\00138=9\00110=056\001"
 
 
 # Load data dictionary.
-data_dictionary_xml = "fix_lib/spec/FIX44.xml"
+data_dictionary_xml = "fix_package/spec/FIX44.xml"
 
 data_dictionary = fix.DataDictionary(data_dictionary_xml)
 fix.Message().InitializeXML(data_dictionary_xml)
